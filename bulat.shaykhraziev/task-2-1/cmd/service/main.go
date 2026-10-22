@@ -1,10 +1,18 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/CWSHBR/task-2-1/internal/temperature"
 )
+
+const (
+	minCount = 1
+	maxCount = 1000
+)
+
+var errCountOutOfRange = errors.New("value is out of range")
 
 func readCount(name string) (int, error) {
 	var count int
@@ -12,6 +20,10 @@ func readCount(name string) (int, error) {
 	_, err := fmt.Scan(&count)
 	if err != nil {
 		return 0, fmt.Errorf("read %s: %w", name, err)
+	}
+
+	if count < minCount || count > maxCount {
+		return 0, fmt.Errorf("%s %d: %w [%d, %d]", name, count, errCountOutOfRange, minCount, maxCount)
 	}
 
 	return count, nil
