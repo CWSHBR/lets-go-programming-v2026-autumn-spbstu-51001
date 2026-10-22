@@ -16,7 +16,6 @@ const (
 
 var ErrInvalidOperator = errors.New("operator must be \">=\" or \"<=\"")
 
-// Range is a set of temperatures suitable for every employee of a department.
 type Range struct {
 	lower int
 	upper int
@@ -29,7 +28,6 @@ func NewRange() Range {
 	}
 }
 
-// Apply returns a new range narrowed by the employee's request.
 func (r Range) Apply(operator string, value int) (Range, error) {
 	switch operator {
 	case opGreaterOrEqual:
@@ -43,7 +41,6 @@ func (r Range) Apply(operator string, value int) (Range, error) {
 	return r, nil
 }
 
-// Optimal returns the lowest suitable temperature or Unreachable if there is none.
 func (r Range) Optimal() int {
 	if r.lower > r.upper {
 		return Unreachable
