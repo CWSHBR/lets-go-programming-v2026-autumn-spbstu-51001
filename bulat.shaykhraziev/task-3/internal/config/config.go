@@ -11,7 +11,7 @@ type Config struct {
 	OutputFile string `yaml:"output-file"`
 }
 
-func readConfig(filePath string) (*Config, error) {
+func ReadConfig(filePath string) (*Config, error) {
 	data, err := os.ReadFile(filePath)
 	if err != nil {
 		return nil, err
